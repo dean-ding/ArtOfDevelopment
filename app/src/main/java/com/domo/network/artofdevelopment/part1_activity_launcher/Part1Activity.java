@@ -1,6 +1,5 @@
 package com.domo.network.artofdevelopment.part1_activity_launcher;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +11,7 @@ import com.domo.network.artofdevelopment.R;
 /**
  * Created: tvt on 2018/4/12 11:45
  */
-public class Part1Activity extends Activity
+public class Part1Activity extends Part1BaseActivity
 {
     private final String TAG = getClass().getSimpleName();
 
@@ -20,6 +19,7 @@ public class Part1Activity extends Activity
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        // 此函数为第一个调用的函数，表示Activity正在被创建，可设置布局的显示以及一些初始化工作
 
         Log.i(TAG, "onCreate----->");
 
@@ -65,10 +65,24 @@ public class Part1Activity extends Activity
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        // APP遇到异常退出时，会调用此函数，在这里可备份数据
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        // APP遇到异常退出后，再打开时，会调用此函数，可从此函数的savedInstanceState读取在onSaveInstanceState备份的数据。
+    }
+
+    @Override
     protected void onStart()
     {
         super.onStart();
-
+        // Activity正在启动，Activity可见，但是还处理后台，但是用户还不能进行交互
         Log.i(TAG, "onStart----->");
     }
 
@@ -76,7 +90,7 @@ public class Part1Activity extends Activity
     protected void onResume()
     {
         super.onResume();
-
+        // Activity可见，已经在前台，用户可进行交互
         Log.i(TAG, "onResume----->");
     }
 
@@ -84,7 +98,8 @@ public class Part1Activity extends Activity
     protected void onRestart()
     {
         super.onRestart();
-
+        // Activity正在重新启动，如果当前Activity从不可见状态变成可见状态时，会调用此函数
+        // note> 点击Home键，或者跳转到另外一个Activity中，且执行了onPause或者onStop函数时，然后返回到这个Activity中。
         Log.i(TAG, "onRestart----->");
     }
 
@@ -92,7 +107,8 @@ public class Part1Activity extends Activity
     protected void onPause()
     {
         super.onPause();
-
+        // Activity正在停止，此时可以进行一些不耗时的的操作，例如停止动画，存储数据。
+        // note> 如果在此函数执行耗时操作，会影响新的Activity的显示速度，执行完此函数之后才会执行新的Activity的生命周期。
         Log.i(TAG, "onPause----->");
     }
 
@@ -100,7 +116,7 @@ public class Part1Activity extends Activity
     protected void onStop()
     {
         super.onStop();
-
+        // Activity即将停止，此时可以进行一些比onPause中稍微重量级一些的操作，但是还是不能太耗时
         Log.i(TAG, "onStop----->");
     }
 
@@ -108,7 +124,7 @@ public class Part1Activity extends Activity
     protected void onDestroy()
     {
         super.onDestroy();
-
+        // Activity即将销毁，此时需要释放所有资源
         Log.i(TAG, "onDestroy----->");
     }
 }
