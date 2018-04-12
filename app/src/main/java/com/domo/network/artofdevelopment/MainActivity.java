@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.domo.network.artofdevelopment.part1_activity_launcher.Part1Activity;
+import com.domo.network.artofdevelopment.part2_activity_launcher.Part2Activity;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -31,7 +32,9 @@ public class MainActivity extends AppCompatActivity
     {
         int count = 15;
         mActivities = new Class[count];
-        for (int i = 0; i < count; i++)
+        mActivities[0] = Part1Activity.class;
+        mActivities[1] = Part2Activity.class;
+        for (int i = 2; i < count; i++)
         {
             mActivities[i] = Part1Activity.class;
         }

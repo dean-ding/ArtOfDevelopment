@@ -29,6 +29,7 @@
         <activity
             android:name=".part1_activity_launcher.StandardActivity"
             android:launchMode="standard"/>
+        <activity android:name=".part2_activity_launcher.Part2Activity"/>
     </application>
 
     <uses-permission android:name="android.permission.GET_TASKS" />
